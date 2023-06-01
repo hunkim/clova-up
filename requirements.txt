@@ -1,0 +1,7 @@
+python-telegram-bot
+openai
+tinydb
+hupper
+uvicorn
+fastapi
+pyyaml
