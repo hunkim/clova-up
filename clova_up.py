@@ -66,9 +66,7 @@ async def newchat_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     await update.message.reply_text("Let's do New Chat!")
 
 
-async def askup_04_memory(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """AskUp Main"""
-
+async def clovaup_stream(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg = await update.message.reply_text("...")
 
     user = update.message.from_user
@@ -82,7 +80,7 @@ async def askup_04_memory(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     # Show messages in logs using lazy % formatting
     logger.info("Messages: %s", json.dumps(messages, indent=2))
 
-    response = await chatgpt_callback_response(
+    response = await clova_create_callback_tba(
         messages=messages,
         call_back_func=context.bot.edit_message_text,
         call_back_args={
@@ -108,9 +106,6 @@ async def askup_04_memory(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def clova_up(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg = await update.message.reply_text("...")
 
-    """
-    AskUp simple QA
-    """
     user = update.message.from_user
     user_id = user.id
 
@@ -118,7 +113,7 @@ async def clova_up(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     messages = get_messages(user_id=user_id) + [new_message]
 
     response = clova_create(messages=messages)
-    if 'content' not in response:
+    if "content" not in response:
         response_text = "Sorry, there is an error." + str(response)
         logger.error(response_text)
     else:
@@ -149,9 +144,7 @@ def main_hanlder(event=None, context=None) -> None:
     application.add_handler(CommandHandler("newchat", newchat_command))
 
     # on non command i.e message - echo the message on Telegram
-    application.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, askup_02_simple)
-    )
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, clova_up))
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
@@ -159,7 +152,7 @@ def main_hanlder(event=None, context=None) -> None:
 
 def start_reloader():
     """Start the reloader"""
-    reloader = hupper.start_reloader("askup.main_hanlder", verbose=True)
+    reloader = hupper.start_reloader("clova_up.main_hanlder", verbose=True)
     sys.exit(reloader.wait_for_exit())
 
 
