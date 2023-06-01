@@ -1,6 +1,4 @@
-# askup-telegram
-
-
-https://user-images.githubusercontent.com/901975/236599545-d1eefe0b-e326-417a-bb19-5786af42bb02.mp4
-
 # clova-up
+<img width="486" alt="image" src="https://github.com/hunkim/clova-up/assets/901975/5e544b6a-abd8-41e0-b71a-5df84caa7107">
+
+## Quick test at: https://t.me/ClovaUpBot
